@@ -141,3 +141,4 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 >>>>>>> 0172800857edf1e732ae91fe42855d1297030e04
+git push -u origin main
