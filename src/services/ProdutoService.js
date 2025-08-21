@@ -1,23 +1,16 @@
 const ProdutoService = require('../services/ProdutoService');
-class ProdutoController {
-    async createProduto(req, res) {
-        try {
-            const produtoData = req.body;
-            const produtoService = new ProdutoService();
-            const produto = await produtoService.createProduto(produtoData);
-            res.status(201).json(produto);
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
+class ProdutoService {
+    constructor() {
+        this.produtoService = new ProdutoService();
     }
 
-    async findAllProdutos(req, res) {
+    async createProduto(produto) {
         try {
-            const produtoService = new ProdutoService();
-            const produtos = await produtoService.getAllProdutos();
-            res.status(200).json(produtos);
+            const savedProduto = await this.produtoService.save(produto);
+            return savedProduto;
         } catch (error) {
-            res.status(500).json({ error: 'Internal Server Error' });
+            throw new Error('Error creating produto: ' + error.message);
         }
     }
+    async up
 }
