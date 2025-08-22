@@ -9,4 +9,7 @@ class UserService {
         const user = await new UserRepository().save(userData);
         return user;
     }
+    async getAllUsers() {
+        return await new UserRepository().findAll();
+    }
 }

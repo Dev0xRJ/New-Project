@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  cadastre-me:
+    build: .
+    container_name: NewProject
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start:dev
