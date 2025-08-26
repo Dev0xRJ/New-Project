@@ -2,21 +2,59 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const oiController = require('./src/controllers/oiController');
+const UserController = require('./src/controllers/userController');
+const ProdutoController = require('./src/controllers/produtoController');
 
-const controller = require('./src/controllers/hello.controller');
-const userController = require('./src/controllers/user.controller');
-const UserContolller = new userController();
 app.use(express.json());
 
-app.get('/', controller.sayHello);
-app.get('/users', UserContolller.findAllUsers);
-app.post('/users', UserContolller.createUser);
-app.get('/user-by-name', UserContolller.getUserByName)
-app.get('/user-by-cep', UserContolller.getUserByCep)
-UserContolller.getUsers(req, res)
+//Produtos
+
+app.post('/produtos', (req, res) => {
+  ProdutoController.save(req, res);
+});
+
+app.get('/produtos', (req, res) => {
+  ProdutoController.findAll(req, res);
+});
+
+app.get('/produtos/:id', (req, res) => {
+  ProdutoController.findById(req, res);
+});
+
+app.put('/produtos/:id', (req, res) => {
+  ProdutoController.update(req, res);
+});
+
+app.delete('/produtos/:id', (req, res) => {
+  ProdutoController.delete(req, res);
+});
+
+//////////////////////////////////////////////////////////////////////
+
+app.get('/oi', oiController.sayOi);
+
+app.post('/users', (req, res) => {
+  UserController.createUser(req, res);
+});
+
+app.get('/users', (req, res) => {
+  UserController.findAllUsers(req, res);
+});
+
+app.get('/users/:id', (req, res) => {
+  UserController.getUserById(req, res);
+});
+
+app.put('/users/:id', (req, res) => {
+  UserController.updateUser(req, res);
+});
+
+app.delete('/users/:id', (req, res) => {
+  UserController.deleteUser(req, res);
+});
 
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`A API está rodando em http://localhost:${port}`);
 });
-

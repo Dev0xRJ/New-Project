@@ -1,16 +1,25 @@
-const ProdutoService = require('../services/ProdutoService');
+const ProdutoRepository = require('../repositories/produtoRepository');
+
 class ProdutoService {
-    constructor() {
-        this.produtoService = new ProdutoService();
+
+    async save(produtoData) {
+        return await ProdutoRepository.save(produtoData);
+    }
+    async findAll() {
+        return await ProdutoRepository.findAll();
     }
 
-    async createProduto(produto) {
-        try {
-            const savedProduto = await this.produtoService.save(produto);
-            return savedProduto;
-        } catch (error) {
-            throw new Error('Error creating produto: ' + error.message);
-        }
+    async findById(id) {
+        return await ProdutoRepository.findById(id);
     }
-    async up
+
+    async update(id, produtoData) {
+        return await ProdutoRepository.update(id, produtoData);
+    }
+
+    async delete(id) {
+        return await ProdutoRepository.delete(id);
+    }
 }
+
+module.exports = new ProdutoService();

@@ -1,23 +1,15 @@
 {
-  "name": "new-project",
+  "name": "aula-API",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-  "start": "nest start",
-  "start:dev": "nest start --watch",
-  "build": "nest build",
-  "test": "jest",
-  "test:watch": "jest --watch",
-  "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
-}
-,
-  "keywords": [],
-  "author": "Seu Nome",
-  "license": "ISC",
-  "description": "Projeto exemplo com busca de usu?rio e ViaCEP",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
-    "axios": "^1.7.2",
-    "express": "^5.1.0",
-    "nodemon": "^3.1.10"
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

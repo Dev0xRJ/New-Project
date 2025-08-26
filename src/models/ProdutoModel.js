@@ -1,9 +1,9 @@
 class Produto {
-    constructor(id, name, pre?o) {
+    constructor(id, descricao, preco) {
         this.id = id;
-        this.name = name;
-        this.pre?o = pre?o;
+        this.descricao = descricao;
+        this.preco = preco;
     }
 }
 
-module.exports = Produto
+module.exports = Produto;

@@ -1,15 +1,38 @@
-const UserRepository = require('../repositors/UserRepository');
+const userRepository = require('../repositories/userRepository');   
+const axios = require('axios');
 
-class UserService {
+class UserService{
 
-    async createUser(userData) {
-        if (!userData.name || !userData.email) {
-            throw new Error('Name and email are required');
+    async createUser(userData){
+        if(!userData.name || !userData.email || !userData.cep){
+            throw new Error('Nome, e-mail e CEP são obrigatórios.');
         }
-        const user = await new UserRepository().save(userData);
+        const cep = userData.cep.replace('-', '');
+        const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then(response => {
+        userData.rua = response.data.logradouro;});
+        const user = await userRepository.save(userData);
         return user;
     }
-    async getAllUsers() {
-        return await new UserRepository().findAll();
+
+    async findAllUsers(){
+        const users = await userRepository.findAll();
+        return users;
+    }  
+
+    async findUserById(id){
+        const user = await userRepository.findById(id);
+        return user;
+    }
+
+    async updateUser(id, userData){
+        const user = await userRepository.update(id, userData);
+        return user;
+    }
+
+    async deleteUser(id){
+        const user = await userRepository.delete(id);
+        return user;
     }
 }
+
+module.exports = new UserService();
